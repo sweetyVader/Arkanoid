@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,11 +9,13 @@ public class GameManager : MonoBehaviour
     private bool _isStarted;
 
     #endregion
+
+
     #region Unity lifecycle
 
     private void Update()
     {
-        if(_isStarted)
+        if (_isStarted)
             return;
 
         _ball.MoveWithPad();
@@ -35,32 +34,7 @@ public class GameManager : MonoBehaviour
     {
         _isStarted = true;
         _ball.StartMove();
-
     }
-    
 
     #endregion
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
