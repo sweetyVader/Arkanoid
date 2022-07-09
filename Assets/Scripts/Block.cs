@@ -1,23 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private int _numHit;
+    [SerializeField] private int _hp;
     [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    #endregion
+
+
+    #region Private methods
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        for (int i = 0; i <= _sprites.Length; i++)
+        
+        _hp--;
+
+        if (_hp <= 0)
         {
+            Destroy(gameObject);
+           // GameManager.Instance.Counter(_numHit);
+           Debug.Log($"{_numHit}");
+           ScoreManager.Instance.Counter(_numHit);
         }
-
-        if (!string.IsNullOrEmpty(col.gameObject.name = "Bottom"))
-            GameOver();
-        Destroy(gameObject);
-        Debug.Log($"Collision obj '{name}' with '{col.gameObject.name}'");
+        else
+        {
+            SetSprite();
+        }
     }
 
-    private void GameOver()
+    private void SetSprite()
     {
+        _spriteRenderer.sprite = _sprites[_sprites.Length - _hp];
     }
+
+    #endregion
 }

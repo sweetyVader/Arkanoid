@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ball
+  - Bottom
+  - Left
+  - Right
+  - Top
   layers:
   - Default
   - TransparentFX

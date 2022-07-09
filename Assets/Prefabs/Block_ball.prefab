@@ -98,11 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475be9204ba04774b94f719a91830f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numHit: 0
-  _images:
-  - {fileID: 21300000, guid: 1dc479aa295dd43f6b481f6fdd3fbc44, type: 3}
+  _numHit: 100
+  _hp: 3
+  _sprites:
   - {fileID: 21300000, guid: 74d94ae472cd2469c986b2e13176218e, type: 3}
   - {fileID: 21300000, guid: eb31165d250684b23b9ea9a1c31af361, type: 3}
+  _spriteRenderer: {fileID: 1503638698959320913}
 --- !u!60 &128145695613841283
 PolygonCollider2D:
   m_ObjectHideFlags: 0

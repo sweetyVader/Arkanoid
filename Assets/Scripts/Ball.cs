@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Ball : MonoBehaviour
 
     #region Unity lifecycle
 
+   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
@@ -25,6 +27,9 @@ public class Ball : MonoBehaviour
 
     public void StartMove()
     {
+        
+        //Vector3 eulers = ball.transform.eulerAngles.x, Random.Range(-45f, 45f), ball.eulerAngles.z;
+        //ball.MoveRotation(eulers);
         _rb.velocity = _startDirection;
     }
 
@@ -38,4 +43,8 @@ public class Ball : MonoBehaviour
         currentPosition.x = padPosition.x;
         transform.position = currentPosition;
     }
+
+    
+   
+
 }
