@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseManager : SingletonMonoBehaviour<PauseManager>
@@ -25,38 +23,27 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
         base.Awake();
         if (Instance)
         {
-           
-            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>()).pause = 
+            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>()).pause =
                 (GameObject.Find(Objects.PauseBackground)).gameObject;
-            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._continueButton = 
+            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._continueButton =
                 (GameObject.Find(Objects.ContinueButton)).GetComponent<Button>();
-            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._restartButton = 
+            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._restartButton =
                 (GameObject.Find(Objects.RestartButton)).GetComponent<Button>();
-            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._exitButton = 
+            ((GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._exitButton =
                 (GameObject.Find(Objects.ExitButton)).GetComponent<Button>();
-
-
-            // (FindObjectOfType<Button>(name == Objects.ContinueButton));
-
-
-
-
-            // (GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._continueButton = ((GameObject.Find(Objects.ContinueButton)).gameObject);
         }
-       
+
         _restartButton.onClick.AddListener(delegate { GameManager.Instance.ReloadScene(); });
-       
     }
 
-  
     private void Update()
-    { _continueButton.onClick.AddListener(TogglePause);
-        _exitButton.onClick.AddListener(ExitGame);
+    {
+        _continueButton.onClick.AddListener(TogglePause);
+        _exitButton.onClick.AddListener(delegate { GameManager.Instance.ExitGame(); });
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePause();
 
         pause.SetActive(IsPaused);
-        Debug.Log($"timeScale {Time.timeScale}");
     }
 
     #endregion
@@ -69,20 +56,6 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0 : 1;
     }
-
-    private void RestartLevel()
-    {
-       SceneLoader.ReloadCurrentScene();
-       IsPaused = false;
-    }
-    
-    private void ExitGame()
-    {
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
-    }
-
-    
 
     #endregion
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Block : MonoBehaviour
 {
@@ -17,15 +16,12 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        
         _hp--;
 
         if (_hp <= 0)
         {
             Destroy(gameObject);
-           // GameManager.Instance.Counter(_numHit);
-           Debug.Log($"{_numHit}");
-           GameManager.Instance.Counter(_numHit);
+            GameManager.Instance.Counter(_numHit);
         }
         else
         {

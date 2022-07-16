@@ -6,6 +6,5 @@ public class LoseZone : MonoBehaviour
     {
         if (col.gameObject.CompareTag(Objects.Ball))
             GameManager.Instance.GameOver();
-         //  FindObjectOfType<GameManager>().GameOver();
     }
 }

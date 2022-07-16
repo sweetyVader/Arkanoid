@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
 public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
 {
     #region Public metods
 
-    public void LoadScene(string sceneName)
+    public static void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }

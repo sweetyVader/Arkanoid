@@ -9,6 +9,8 @@ TagManager:
   - Left
   - Right
   - Top
+  - ExitGameButton
+  - RestartGameButton
   layers:
   - Default
   - TransparentFX

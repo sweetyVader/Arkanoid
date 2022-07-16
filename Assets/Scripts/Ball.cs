@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -9,27 +7,25 @@ public class Ball : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Vector2 _startDirection;
     [SerializeField] private Pad _pad;
-    
+
     #endregion
 
 
     #region Unity lifecycle
 
-   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position,  (Vector3)_startDirection + transform.position);
+        Gizmos.DrawLine(transform.position, (Vector3) _startDirection + transform.position);
     }
 
     #endregion
+
+
     #region Public methods
 
     public void StartMove()
     {
-        
-        //Vector3 eulers = ball.transform.eulerAngles.x, Random.Range(-45f, 45f), ball.eulerAngles.z;
-        //ball.MoveRotation(eulers);
         Time.timeScale = 1;
         _rb.velocity = _startDirection;
     }
@@ -44,8 +40,4 @@ public class Ball : MonoBehaviour
         currentPosition.x = padPosition.x;
         transform.position = currentPosition;
     }
-
-    
-   
-
 }
