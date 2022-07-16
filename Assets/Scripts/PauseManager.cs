@@ -15,7 +15,7 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
     #endregion
 
 
-    public bool IsPaused { get; private set; }
+    public bool IsPaused { get; set; }
 
 
     #region Unity lifecycle
@@ -36,31 +36,27 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
                 (GameObject.Find(Objects.ExitButton)).GetComponent<Button>();
 
 
-            // (FindObjectOfType<Button>(name == Objects.ContinueButtom));
+            // (FindObjectOfType<Button>(name == Objects.ContinueButton));
 
 
 
 
-            // (GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._continueButton = ((GameObject.Find(Objects.ContinueButtom)).gameObject);
+            // (GameObject.Find(Objects.PauseManager)).GetComponent<PauseManager>())._continueButton = ((GameObject.Find(Objects.ContinueButton)).gameObject);
         }
-        
+       
+        _restartButton.onClick.AddListener(delegate { GameManager.Instance.ReloadScene(); });
+       
     }
 
-    private void Start()
-    {
-     
-        Debug.Log($"restart. isPaused false");
-        _continueButton.onClick.AddListener(TogglePause);
-        _restartButton.onClick.AddListener(RestartLevel);
-        _exitButton.onClick.AddListener(ExitGame);
-    }
-
+  
     private void Update()
-    {
+    { _continueButton.onClick.AddListener(TogglePause);
+        _exitButton.onClick.AddListener(ExitGame);
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePause();
 
         pause.SetActive(IsPaused);
+        Debug.Log($"timeScale {Time.timeScale}");
     }
 
     #endregion
@@ -76,8 +72,8 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     private void RestartLevel()
     {
-       // SceneLoader.Instance.ReloadCurrentScene();
-       SceneManager.LoadScene("SceneLevel_1");
+       SceneLoader.ReloadCurrentScene();
+       IsPaused = false;
     }
     
     private void ExitGame()

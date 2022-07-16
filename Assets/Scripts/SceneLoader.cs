@@ -10,7 +10,7 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
         SceneManager.LoadScene(sceneName);
     }
 
-    public void ReloadCurrentScene()
+    public static void ReloadCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

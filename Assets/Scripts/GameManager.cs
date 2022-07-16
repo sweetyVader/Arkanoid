@@ -3,21 +3,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     #region Variable
 
     [SerializeField] private Ball _ball;
-    //[SerializeField] private TextMeshProUGUI _currentScore;
+    [SerializeField] private TextMeshProUGUI _currentScore;
+    [SerializeField] private TextMeshProUGUI _gameOverScore;
     private int _counterScore;
     private bool _isStarted;
-
+    
+    public GameObject gameOver;
+    
     #endregion
 
 
     #region Unity lifecycle
 
-    /*protected override void Awake()
+    protected override void Awake()
     {
         base.Awake();
         
@@ -25,7 +28,8 @@ public class GameManager : MonoBehaviour
             (GameObject.Find(Objects.Ball)).GetComponent<Ball>();
         ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._currentScore =
             (GameObject.Find(Objects.ScoreText)).GetComponent<TextMeshProUGUI>();
-    }*/
+        _isStarted = false;
+    }
 
    
 
@@ -58,16 +62,28 @@ public class GameManager : MonoBehaviour
 
     #region Public methods
 
-    public void GameOver() =>
-        //   SceneLoader.Instance.ReloadCurrentScene();
-        SceneManager.LoadScene("SceneLevel_1");
+    public void ReloadScene()
+    {
+        SceneLoader.ReloadCurrentScene();
+        _isStarted = false;
+        _counterScore = 0;
+        PauseManager.Instance.IsPaused = false;
+    }
     
+    public void GameOver()
+    {
+        SceneLoader.ReloadCurrentScene();
+        _isStarted = false;
+        _counterScore = 0;
+        
+    }
 
+   
     public void Counter(int score)
     {
         
         _counterScore += score;
-      //  _currentScore.text = _counterScore.ToString();
+        _currentScore.text = _counterScore.ToString();
        
     }
 

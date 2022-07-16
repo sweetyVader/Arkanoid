@@ -13,7 +13,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     #endregion
 
 
-    protected override void Awake()
+ /*   protected override void Awake()
     {
         base.Awake();
         if (Instance)
@@ -22,7 +22,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
                 (GameObject.Find(Objects.ScoreText)).GetComponent<TextMeshProUGUI>();
         }
 
+        _counterScore = 0;
+
     }
+    
 
 
     #region Public methods
@@ -30,9 +33,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     public void Counter(int score)
     {
         _counterScore += score;
-        
-            _currentScore.text = _counterScore.ToString();
+        _currentScore.text = _counterScore.ToString();
     }
 
-    #endregion
+    #endregion*/
 }

@@ -25,7 +25,7 @@ public class Block : MonoBehaviour
             Destroy(gameObject);
            // GameManager.Instance.Counter(_numHit);
            Debug.Log($"{_numHit}");
-           ScoreManager.Instance.Counter(_numHit);
+           GameManager.Instance.Counter(_numHit);
         }
         else
         {

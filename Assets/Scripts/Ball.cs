@@ -30,6 +30,7 @@ public class Ball : MonoBehaviour
         
         //Vector3 eulers = ball.transform.eulerAngles.x, Random.Range(-45f, 45f), ball.eulerAngles.z;
         //ball.MoveRotation(eulers);
+        Time.timeScale = 1;
         _rb.velocity = _startDirection;
     }
 
