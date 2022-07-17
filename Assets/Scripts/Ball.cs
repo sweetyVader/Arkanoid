@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
     #endregion
 
 
-    #region Unity lifecycle
+    #region Private methods
 
     private void OnDrawGizmos()
     {
@@ -30,9 +30,6 @@ public class Ball : MonoBehaviour
         _rb.velocity = _startDirection;
     }
 
-    #endregion
-
-
     public void MoveWithPad()
     {
         Vector3 padPosition = _pad.transform.position;
@@ -40,4 +37,6 @@ public class Ball : MonoBehaviour
         currentPosition.x = padPosition.x;
         transform.position = currentPosition;
     }
+
+    #endregion
 }

@@ -21,7 +21,7 @@ public class Block : MonoBehaviour
         if (_hp <= 0)
         {
             Destroy(gameObject);
-            GameManager.Instance.Counter(_numHit);
+            ScoreManager.Instance.Counter(_numHit);
         }
         else
         {

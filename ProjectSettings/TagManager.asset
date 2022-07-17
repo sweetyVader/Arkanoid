@@ -11,6 +11,9 @@ TagManager:
   - Top
   - ExitGameButton
   - RestartGameButton
+  - Destructible block
+  - GameManager
+  - PauseManager
   layers:
   - Default
   - TransparentFX

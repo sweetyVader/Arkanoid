@@ -1,18 +1,14 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     #region Variable
 
     [SerializeField] private Ball _ball;
-    [SerializeField] private TextMeshProUGUI _currentScore;
-    [SerializeField] private TextMeshProUGUI _gameOverScore;
-    [SerializeField] private Button _restartGameButton;
-    [SerializeField] private Button _exitGameButton;
+
     [SerializeField] private GameObject[] _allLifes;
-    private int _counterScore;
+
     private bool _isStarted;
     private int _lifes;
     public GameObject gameOver;
@@ -25,24 +21,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     protected override void Awake()
     {
         base.Awake();
+        //DontDestroyOnLoad(_lifes);
         if (Instance)
         {
             ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._ball =
                 (GameObject.Find(Objects.Ball)).GetComponent<Ball>();
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._currentScore =
-                (GameObject.Find(Objects.ScoreText)).GetComponent<TextMeshProUGUI>();
+
             ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>()).gameOver =
                 (GameObject.Find(Objects.GameOverBackground)).gameObject;
 
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._restartGameButton =
-                (GameObject.Find(Objects.RestartGameButton)).GetComponent<Button>();
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._exitGameButton =
-                (GameObject.Find(Objects.ExitGameButton)).GetComponent<Button>();
 
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._gameOverScore =
-                (GameObject.Find(Objects.ScoreGameText)).GetComponent<TextMeshProUGUI>();
-
-            /*for (int numLife = _allLifes.Length; numLife <= 0; numLife++)
+            /*for (int numLife = _lifes; numLife <= 0; numLife++)
             {
                 ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._allLifes[numLife - 1] =
                     (GameObject.Find($"heart[{numLife}]")).gameObject;
@@ -56,15 +45,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 (GameObject.Find(Objects.Heart1)).gameObject;
         }
 
-        _restartGameButton.onClick.AddListener(RestartGame);
-        _exitGameButton.onClick.AddListener(ExitGame);
+
         gameOver.SetActive(false);
-        _isStarted = false;
+
         _lifes = _allLifes.Length;
     }
 
     private void Update()
     {
+        Win();
+
+        Debug.Log($"is started {_isStarted}");
         if (_isStarted)
             return;
 
@@ -91,6 +82,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _ball.StartMove();
     }
 
+    private void Win()
+    {
+        if (SceneManager.GetActiveScene().name == Objects.WinScene)
+        {
+            GameObject.FindWithTag(Objects.GameManager).SetActive(false);
+            GameObject.FindWithTag(Objects.PauseManager).SetActive(false);
+        }
+        else if (GameObject.FindWithTag(Objects.DestructibleBlock) == null)
+        {
+            SceneLoader.Instance.LoadNextScene();
+            _isStarted = false;
+        }
+    }
+
     #endregion
 
 
@@ -98,18 +103,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void ReloadScene()
     {
-        SceneLoader.ReloadCurrentScene();
+        SceneLoader.Instance.ReloadCurrentScene();
         _isStarted = false;
-        _counterScore = 0;
+        ScoreManager.Score = 0;
         PauseManager.Instance.IsPaused = false;
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
         SceneLoader.LoadScene(Objects.FirstSceneLevel);
         _isStarted = false;
-        _counterScore = 0;
+        ScoreManager.Score = 0;
         PauseManager.Instance.IsPaused = false;
+        GameObject.FindWithTag(Objects.GameManager).SetActive(true);
+        GameObject.FindWithTag(Objects.PauseManager).SetActive(true);
     }
 
     public void GameOver()
@@ -128,14 +135,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             Time.timeScale = 0;
             gameOver.SetActive(true);
             _lifes = _allLifes.Length;
-            _gameOverScore.text = $"Score: {_counterScore.ToString()}";
         }
-    }
-
-    public void Counter(int score)
-    {
-        _counterScore += score;
-        _currentScore.text = _counterScore.ToString();
     }
 
     public void ExitGame()

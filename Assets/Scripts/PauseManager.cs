@@ -13,7 +13,11 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
     #endregion
 
 
+    #region Properties
+
     public bool IsPaused { get; set; }
+
+    #endregion
 
 
     #region Unity lifecycle
