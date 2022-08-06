@@ -65,7 +65,7 @@ public class Ball : MonoBehaviour
 
     public void ChangeSize(float size)
     {
-        gameObject.transform.localScale = new Vector3(size, size);
+        transform.localScale = new Vector3(size, size);
     }
     
     public void RestartPosition()

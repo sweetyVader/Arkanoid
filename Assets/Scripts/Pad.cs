@@ -68,4 +68,12 @@ public class Pad : SingletonMonoBehaviour<Pad>
     }
 
     #endregion
+
+
+    public void ChangeSize(float size)
+    {
+        Vector3 currentPadScale = transform.localScale;
+        currentPadScale.x = size;
+        transform.localScale = currentPadScale;
+    }
 }
