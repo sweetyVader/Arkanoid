@@ -15,6 +15,7 @@ TagManager:
   - GameManager
   - PauseManager
   - Pad
+  - Life
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - PickUp
   - Wall
   - Block
-  - 
+  - Life
   - 
   - 
   - 

@@ -8,7 +8,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private Ball _ball;
 
-    private int _lifes;
+    private int _lifes = 3;
     private bool _isStarted;
     private bool _isGameOver;
     [SerializeField] private bool _needAutoPlay;
@@ -19,7 +19,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     #region Properties
 
     public bool NeedAutoPlay => _needAutoPlay;
-    public int Lifes { get; set; }
+    public int Lifes { get; private set; }
 
     #endregion
 
@@ -38,13 +38,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         base.Awake();
         _ball = FindObjectOfType<Ball>();
+        Lifes = _lifes;
     }
 
-    private void Start()
-    {
-        _lifes = Lifes;
-    }
-
+    
     private void Update()
     {
         Win();
@@ -125,7 +122,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             OnLifeChanged?.Invoke(_lifes);
             _isStarted = false;
             _ball.RestartPosition();
-            // FindObjectOfType<Ball>().RestartPosition();
         }
         else
         {
@@ -135,6 +131,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
+    public void ChangeLife(int num)
+    {
+        _lifes += num;
+        OnLifeChanged?.Invoke(_lifes);
+    }
     public void ExitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
