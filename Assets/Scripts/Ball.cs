@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Vector2 _startDirection;
+    [SerializeField] private float _minSpeed = 1;
 
     private Vector2 _startPosition;
 
@@ -15,6 +17,12 @@ public class Ball : MonoBehaviour
     private void Awake()
     {
         _startPosition = transform.position;
+    }
+
+    private void Start()
+    {
+        if (GameManager.Instance.NeedAutoPlay)
+            GameManager.Instance.StartBall();
     }
 
 
@@ -41,6 +49,18 @@ public class Ball : MonoBehaviour
         Vector3 currentPosition = transform.position;
         currentPosition.x = Pad.Instance.PadPositionX;
         transform.position = currentPosition;
+    }
+
+    public void ChangeSpeed(float speedMultiplier)
+    {
+        Vector2 velocity = _rb.velocity;
+        float velocityMagnitude = velocity.magnitude;
+        velocityMagnitude *= speedMultiplier;
+
+        if (velocityMagnitude < _minSpeed)
+            velocityMagnitude = _minSpeed;
+
+        _rb.velocity = velocity.normalized * velocityMagnitude;
     }
 
     public void RestartPosition()

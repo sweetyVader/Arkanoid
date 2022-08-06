@@ -1,9 +1,6 @@
 ﻿public static class Objects
 {
-    public const string Left = "Left";
-    public const string Right = "Right";
-    public const string Top = "Top";
-    public const string Bottom = "Bottom";
+    
 
     public const string ScoreText = "ScoreLabel1";
     public const string ScoreGameText = "ScoreGameLabel";
@@ -24,8 +21,8 @@
     public const string RestartGameButton = "RestartGameButton";
     public const string ExitGameButton = "ExitGameButton";
 
-    public const string Ball = "Ball";
-    public const string Pad = "Pad";
+    
+ 
     public const string Life = "Life";
     public const string DestructibleBlock = "Destructible block";
     public const string Heart1 = "heart[1]";

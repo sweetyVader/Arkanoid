@@ -14,17 +14,18 @@ TagManager:
   - Destructible block
   - GameManager
   - PauseManager
+  - Pad
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pad
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Ball
+  - PickUp
+  - Wall
+  - Block
   - 
   - 
   - 

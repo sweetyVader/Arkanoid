@@ -11,12 +11,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private int _lifes;
     private bool _isStarted;
     private bool _isGameOver;
+    [SerializeField] private bool _needAutoPlay;
 
     #endregion
 
 
     #region Properties
 
+    public bool NeedAutoPlay => _needAutoPlay;
     public int Lifes { get; set; }
 
     #endregion
@@ -68,13 +70,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
-    private void StartBall()
-    {
-        _isStarted = true;
-        PauseManager.Instance.ResumeTime();
-        _ball.StartMove();
-    }
-
     private void Win()
     {
         if (SceneManager.GetActiveScene().name == Objects.WinScene)
@@ -93,6 +88,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     #region Public methods
+
+    public void StartBall()
+    {
+        _isStarted = true;
+        PauseManager.Instance.ResumeTime();
+        _ball.StartMove();
+    }
 
     public void ReloadScene()
     {
@@ -122,6 +124,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             OnLifeChanged?.Invoke(_lifes);
             _isStarted = false;
             _ball.RestartPosition();
+            // FindObjectOfType<Ball>().RestartPosition();
         }
         else
         {
