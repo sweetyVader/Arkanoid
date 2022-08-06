@@ -73,7 +73,12 @@ public class Ball : MonoBehaviour
         transform.position = _startPosition;
     }
 
-    
+    public void SnapBallToPad()
+    {
+        PauseManager.Instance.StopTime();
+        RestartPosition();
+        GameManager.Instance.ReturnBallAndPad();
+    }
     #endregion
 
 

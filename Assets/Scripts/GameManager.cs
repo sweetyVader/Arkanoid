@@ -61,14 +61,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     #region Private methods
 
-    private void ReturnBallAndPad()
-    {
-        _ball.MoveWithPad();
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartBall();
-        }
-    }
+    
 
     private void Win()
     {
@@ -88,7 +81,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     #region Public methods
-
+    public void ReturnBallAndPad()
+    {
+        _isStarted = false;
+        _ball.MoveWithPad();
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartBall();
+        }
+    }
     public void StartBall()
     {
         _isStarted = true;
