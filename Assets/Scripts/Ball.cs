@@ -63,10 +63,19 @@ public class Ball : MonoBehaviour
         _rb.velocity = velocity.normalized * velocityMagnitude;
     }
 
+    public void ChangeSize(float size)
+    {
+        gameObject.transform.localScale = new Vector3(size, size);
+    }
+    
     public void RestartPosition()
     {
         transform.position = _startPosition;
     }
 
+    
     #endregion
+
+
+    
 }

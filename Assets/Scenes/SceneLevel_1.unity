@@ -1078,7 +1078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &310893607
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1777,7 +1777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &496195452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3648,7 +3648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04939beec489e440b6259cd5cac7bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _needAutoPlay: 1
+  _needAutoPlay: 0
 --- !u!4 &1206921115
 Transform:
   m_ObjectHideFlags: 0
@@ -4186,6 +4186,14 @@ PrefabInstance:
     - target: {fileID: 4681610176913495115, guid: cb16632a02cce2b4e91312e0f404ab4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201653990472460434, guid: cb16632a02cce2b4e91312e0f404ab4f, type: 3}
+      propertyPath: _pickUpPrefab
+      value: 
+      objectReference: {fileID: 7966586793079746166, guid: fae1324b5e526fd468c6be0e503dc39a, type: 3}
+    - target: {fileID: 5201653990472460434, guid: cb16632a02cce2b4e91312e0f404ab4f, type: 3}
+      propertyPath: _pickUpSpawnChance
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb16632a02cce2b4e91312e0f404ab4f, type: 3}
