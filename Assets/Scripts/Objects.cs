@@ -25,6 +25,7 @@
     public const string ExitGameButton = "ExitGameButton";
 
     public const string Ball = "Ball";
+    public const string Pad = "Pad";
     public const string Life = "Life";
     public const string DestructibleBlock = "Destructible block";
     public const string Heart1 = "heart[1]";

@@ -1,7 +1,14 @@
 ﻿using UnityEngine;
 
-public class Pad : MonoBehaviour
+public class Pad : SingletonMonoBehaviour<Pad>
 {
+    #region Properties
+
+    public float PadPositionX { get; private set; }
+
+    #endregion
+
+
     #region Unity lifecycle
 
     private void Update()
@@ -14,6 +21,8 @@ public class Pad : MonoBehaviour
         currentPosition.x = mousePositionInUnits.x;
 
         transform.position = currentPosition;
+
+        PadPositionX = currentPosition.x;
     }
 
     #endregion

@@ -6,9 +6,16 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Vector2 _startDirection;
-    [SerializeField] private Pad _pad;
+
+    private Vector2 _startPosition;
 
     #endregion
+
+
+    private void Awake()
+    {
+        _startPosition = transform.position;
+    }
 
 
     #region Private methods
@@ -26,16 +33,19 @@ public class Ball : MonoBehaviour
 
     public void StartMove()
     {
-        Time.timeScale = 1;
         _rb.velocity = _startDirection;
     }
 
     public void MoveWithPad()
     {
-        Vector3 padPosition = _pad.transform.position;
         Vector3 currentPosition = transform.position;
-        currentPosition.x = padPosition.x;
+        currentPosition.x = Pad.Instance.PadPositionX;
         transform.position = currentPosition;
+    }
+
+    public void RestartPosition()
+    {
+        transform.position = _startPosition;
     }
 
     #endregion

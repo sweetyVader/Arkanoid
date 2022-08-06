@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,13 +6,26 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     #region Variable
 
-    [SerializeField] private Ball _ball;
+    private Ball _ball;
 
-    [SerializeField] private GameObject[] _allLifes;
-
-    private bool _isStarted;
     private int _lifes;
-    public GameObject gameOver;
+    private bool _isStarted;
+    private bool _isGameOver;
+
+    #endregion
+
+
+    #region Properties
+
+    public int Lifes { get; set; }
+
+    #endregion
+
+
+    #region Events
+
+    public event Action<int> OnLifeChanged;
+    public event Action<bool> OnGameOver;
 
     #endregion
 
@@ -21,42 +35,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        //DontDestroyOnLoad(_lifes);
-        if (Instance)
-        {
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._ball =
-                (GameObject.Find(Objects.Ball)).GetComponent<Ball>();
+        _ball = FindObjectOfType<Ball>();
+    }
 
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>()).gameOver =
-                (GameObject.Find(Objects.GameOverBackground)).gameObject;
-
-
-            /*for (int numLife = _lifes; numLife <= 0; numLife++)
-            {
-                ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._allLifes[numLife - 1] =
-                    (GameObject.Find($"heart[{numLife}]")).gameObject;
-            }*/
-
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._allLifes[2] =
-                (GameObject.Find(Objects.Heart3)).gameObject;
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._allLifes[1] =
-                (GameObject.Find(Objects.Heart2)).gameObject;
-            ((GameObject.Find(Objects.GameManager)).GetComponent<GameManager>())._allLifes[0] =
-                (GameObject.Find(Objects.Heart1)).gameObject;
-        }
-
-
-        gameOver.SetActive(false);
-
-        _lifes = _allLifes.Length;
+    private void Start()
+    {
+        _lifes = Lifes;
     }
 
     private void Update()
     {
         Win();
-
-        Debug.Log($"is started {_isStarted}");
-        if (_isStarted)
+        if (_ball == null)
+            _ball = FindObjectOfType<Ball>();
+        if (_isStarted || _isGameOver)
             return;
 
         ReturnBallAndPad();
@@ -79,6 +71,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void StartBall()
     {
         _isStarted = true;
+        PauseManager.Instance.ResumeTime();
         _ball.StartMove();
     }
 
@@ -105,36 +98,36 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         SceneLoader.Instance.ReloadCurrentScene();
         _isStarted = false;
-        ScoreManager.Score = 0;
-        PauseManager.Instance.IsPaused = false;
+        ScoreManager.Instance.ResetScore();
+        PauseManager.Instance.ResumeTime();
     }
 
     public void RestartGame()
     {
         SceneLoader.LoadScene(Objects.FirstSceneLevel);
         _isStarted = false;
-        ScoreManager.Score = 0;
-        PauseManager.Instance.IsPaused = false;
-        GameObject.FindWithTag(Objects.GameManager).SetActive(true);
-        GameObject.FindWithTag(Objects.PauseManager).SetActive(true);
+        _isGameOver = false;
+        ScoreManager.Instance.ResetScore();
+        //PauseManager.Instance.OnPause?.Invoke(false);
+        //GameObject.FindWithTag(Objects.GameManager).SetActive(true);
+        //GameObject.FindWithTag(Objects.PauseManager).SetActive(true);
     }
 
     public void GameOver()
     {
         _lifes--;
+        PauseManager.Instance.StopTime();
         if (_lifes != 0)
         {
-            Destroy(_allLifes[_lifes]);
-
-            Time.timeScale = 0;
+            OnLifeChanged?.Invoke(_lifes);
             _isStarted = false;
-            _ball.transform.position = new Vector2(0f, -4f);
+            _ball.RestartPosition();
         }
         else
         {
-            Time.timeScale = 0;
-            gameOver.SetActive(true);
-            _lifes = _allLifes.Length;
+            _lifes = Lifes;
+            _isGameOver = true;
+            OnGameOver?.Invoke(true);
         }
     }
 

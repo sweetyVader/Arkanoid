@@ -1,37 +1,27 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using System;
 
 public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 {
-    #region Variables
+    #region Events
 
-    [SerializeField] private TextMeshProUGUI _currentScore;
+    public event Action<int> OnScoreChanged;
 
     #endregion
 
 
     #region Properties
 
-    public static int Score { get; set; }
+    public int Score { get; private set; }
 
     #endregion
 
 
-    #region Unity lifecycle
+    #region Public methods
 
-    protected override void Awake()
+    public void ChangeScore(int score)
     {
-        base.Awake();
-        DontDestroyOnLoad(gameObject);
-        if (Score != 0)
-            DontDestroyOnLoad(gameObject);
-        ((GameObject.Find(Objects.ScoreManager)).GetComponent<ScoreManager>())._currentScore =
-            (GameObject.Find(Objects.ScoreText)).GetComponent<TextMeshProUGUI>();
-    }
-
-    private void Update()
-    {
-        _currentScore.text = Score.ToString();
+        Score += score;
+        OnScoreChanged?.Invoke(Score);
     }
 
     #endregion
@@ -39,9 +29,9 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 
     #region Public methods
 
-    public void Counter(int score)
+    public void ResetScore()
     {
-        Score += score;
+        Score = 0;
     }
 
     #endregion

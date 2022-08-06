@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class WinSceneManager : MonoBehaviour
+public class WinScreen : MonoBehaviour
 {
     #region Variable
 
@@ -15,8 +15,8 @@ public class WinSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        _restartButton.onClick.AddListener(delegate { GameManager.Instance.RestartGame(); });
-        _exitButton.onClick.AddListener(delegate { GameManager.Instance.ExitGame(); });
+        _restartButton.onClick.AddListener(GameManager.Instance.RestartGame);
+        _exitButton.onClick.AddListener(GameManager.Instance.ExitGame);
     }
 
     #endregion
