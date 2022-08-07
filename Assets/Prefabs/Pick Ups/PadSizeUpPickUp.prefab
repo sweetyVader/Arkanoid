@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbd1808998943c082aedf44fd4b5b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  _pickUpScore: -20
   _size: 2
 --- !u!61 &-1262722548542577012
 BoxCollider2D:

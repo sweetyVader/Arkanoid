@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7574244539302893134}
   - component: {fileID: 3288202060544058651}
-  - component: {fileID: 4145953194219005487}
   - component: {fileID: 4030232887177744092}
   - component: {fileID: 6441401420717659137}
   - component: {fileID: -6168274609080310555}
@@ -88,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4145953194219005487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5315482850731772551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e6b8c4cbdf49f1aeae2c08633173ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _score: -50
 --- !u!50 &4030232887177744092
 Rigidbody2D:
   serializedVersion: 4
@@ -177,4 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc33697fa2349959ba4fe60d21d15f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  _pickUpScore: -60
   _life: 0.39

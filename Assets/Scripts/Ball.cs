@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _minSpeed = 1;
 
     private Vector2 _startPosition;
+    private bool _isExplosive = false;
 
     [Header("Music")]
     [SerializeField] private AudioSource _audioSource;
@@ -40,6 +41,12 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         _audioSource.Play();
+        if (_isExplosive & col.gameObject.CompareTag(Tags.Block))
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.8f, 9);
+
+            DestroyBlockByExplosive(colliders);
+        }
     }
 
     #endregion
@@ -97,4 +104,24 @@ public class Ball : MonoBehaviour
     }
 
     #endregion
+
+
+    public void ChangeSprite(Sprite newSprite, SpriteRenderer ballSpriteRenderer)
+    {
+        //ballSpriteRenderer.sprite = newSprite;
+    }
+
+    public void ExplosiveBall(float radius, LayerMask layerMask)
+    {
+        _isExplosive = true;
+    }
+
+    private static void DestroyBlockByExplosive(Collider2D[] colliders)
+    {
+        foreach (Collider2D collider in colliders)
+        {
+            Block blockToExplode = collider.GetComponent<Block>();
+            blockToExplode.DestroyBlock();
+        }
+    }
 }

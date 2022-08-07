@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5972800538751078394}
   m_Layer: 9
   m_Name: Block_triangle
-  m_TagString: Destructible block
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 721f37ea222bf4d61a2baec02fc68cf9, type: 3}
   - {fileID: 21300000, guid: a66c7ee9f8f1b4a6b939a939e6502a4e, type: 3}
   _spriteRenderer: {fileID: 6136662714816824640}
+  _pickUpSpawnChance: 0
+  _pickUpInfoArray: []
+  _audioClip: {fileID: 0}
 --- !u!60 &5972800538751078394
 PolygonCollider2D:
   m_ObjectHideFlags: 0

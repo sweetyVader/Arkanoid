@@ -16,6 +16,7 @@ TagManager:
   - PauseManager
   - Pad
   - Life
+  - Block
   layers:
   - Default
   - TransparentFX

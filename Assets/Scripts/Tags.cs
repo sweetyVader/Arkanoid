@@ -10,4 +10,5 @@ public class Tags : MonoBehaviour
     public const string Ball = "Ball";
     public const string Pad = "Pad";
     public const string Life = "Life";
+    public const string Block = "Block";
 }
