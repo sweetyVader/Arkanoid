@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -78,6 +77,15 @@ public class Ball : MonoBehaviour
         PauseManager.Instance.StopTime();
         RestartPosition();
         GameManager.Instance.ReturnBallAndPad();
+    }
+    
+    public void DoubleBall(GameObject ball)
+    {
+        Vector3 currentPosition = ball.transform.position;
+        
+        
+       Instantiate(ball, currentPosition, Quaternion.identity);
+      
     }
     #endregion
 

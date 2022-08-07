@@ -6,8 +6,11 @@ public class LoseZone : MonoBehaviour
     {
         if (col.gameObject.CompareTag(Tags.Ball))
         {
-            GameManager.Instance.GameOver();
-        } 
+            if (GameObject.FindGameObjectsWithTag(Tags.Ball).Length == 1) 
+                GameManager.Instance.GameOver();
+            else
+                Destroy(col.gameObject);
+        }
         else
         {
             Destroy(col.gameObject);

@@ -361,8 +361,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dfe8747ab8cf540328bda03efaf88665, type: 3}
-  m_Color: {r: 0.14312741, g: 0.06849409, b: 0.9811321, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7c7aa89f616513d4bab30efde782b902, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4907,6 +4907,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 382038659906441260, guid: ba1667672c5f2e94896e6170373da35d, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354208294682052646, guid: ba1667672c5f2e94896e6170373da35d, type: 3}
+      propertyPath: _pickUpPrefab
+      value: 
+      objectReference: {fileID: 7966586793079746166, guid: cffc5a4d947d12d4c8917e17d771ce50, type: 3}
+    - target: {fileID: 4354208294682052646, guid: ba1667672c5f2e94896e6170373da35d, type: 3}
+      propertyPath: _pickUpSpawnChance
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8313590193080433427, guid: ba1667672c5f2e94896e6170373da35d, type: 3}

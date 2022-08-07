@@ -143,4 +143,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
     #endregion
+
+
+   
 }
