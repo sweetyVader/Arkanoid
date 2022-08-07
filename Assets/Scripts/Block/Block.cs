@@ -18,6 +18,9 @@ public class Block : MonoBehaviour
     [SerializeField] private float _pickUpSpawnChance;
     [SerializeField] private PickUpInfo[] _pickUpInfoArray;
 
+
+    [Header("Music")]
+    [SerializeField] private AudioClip _audioClip;
     #endregion
 
 
@@ -50,13 +53,17 @@ public class Block : MonoBehaviour
         _hp--;
 
         if (_hp <= 0)
+        {
+           
             DestroyBlock();
+        }
         else
             SetSprite();
     }
 
     public virtual void DestroyBlock()
     {
+        AudioPlayer.Instance.PlaySound(_audioClip);
         SpawnPickUp();
         Destroy(gameObject);
         ScoreManager.Instance.ChangeScore(_numHit);

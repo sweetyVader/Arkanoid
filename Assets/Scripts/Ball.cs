@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _minSpeed = 1;
 
     private Vector2 _startPosition;
+
+    [Header("Music")]
+    [SerializeField] private AudioSource _audioSource;
 
     #endregion
 
@@ -31,6 +35,11 @@ public class Ball : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(transform.position, (Vector3) _startDirection + transform.position);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        _audioSource.Play();
     }
 
     #endregion
@@ -66,7 +75,7 @@ public class Ball : MonoBehaviour
     {
         transform.localScale = new Vector3(size, size);
     }
-    
+
     public void RestartPosition()
     {
         transform.position = _startPosition;
@@ -78,17 +87,14 @@ public class Ball : MonoBehaviour
         RestartPosition();
         GameManager.Instance.ReturnBallAndPad();
     }
-    
+
     public void DoubleBall(GameObject ball)
     {
         Vector3 currentPosition = ball.transform.position;
-        
-        
-       Instantiate(ball, currentPosition, Quaternion.identity);
-      
+
+
+        Instantiate(ball, currentPosition, Quaternion.identity);
     }
+
     #endregion
-
-
-    
 }
