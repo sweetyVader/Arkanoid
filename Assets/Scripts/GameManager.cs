@@ -9,6 +9,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private Ball _ball;
 
     private int _lifes = 3;
+    private int _lifeBetweenScenes;
     private bool _isStarted;
     private bool _isGameOver;
     [SerializeField] private bool _needAutoPlay;
@@ -38,10 +39,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         base.Awake();
         _ball = FindObjectOfType<Ball>();
-        Lifes = _lifes;
+
+        Lifes = _lifeBetweenScenes == 0 ? _lifes : _lifeBetweenScenes;
     }
 
-    
     private void Update()
     {
         Win();
@@ -49,7 +50,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             _ball = FindObjectOfType<Ball>();
         if (_isStarted || _isGameOver)
             return;
-
         ReturnBallAndPad();
     }
 
@@ -58,8 +58,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     #region Private methods
 
-    
-
     private void Win()
     {
         if (SceneManager.GetActiveScene().name == Objects.WinScene)
@@ -67,8 +65,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             GameObject.FindWithTag(Objects.GameManager).SetActive(false);
             GameObject.FindWithTag(Objects.PauseManager).SetActive(false);
         }
-        else if (GameObject.FindWithTag(Objects.DestructibleBlock) == null)
+        else if (GameObject.FindGameObjectWithTag(Tags.Block) == null)
         {
+            _lifeBetweenScenes = Lifes;
+            FindObjectOfType<Pad>().transform.localScale = Pad.Instance.StartPadSize;
+            FindObjectOfType<Ball>().transform.localScale = _ball.StartBallSize;
             SceneLoader.Instance.LoadNextScene();
             _isStarted = false;
         }
@@ -78,6 +79,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     #region Public methods
+
     public void ReturnBallAndPad()
     {
         _isStarted = false;
@@ -87,6 +89,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             StartBall();
         }
     }
+
     public void StartBall()
     {
         _isStarted = true;
@@ -100,6 +103,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _isStarted = false;
         ScoreManager.Instance.ResetScore();
         PauseManager.Instance.ResumeTime();
+        GameObject.FindGameObjectWithTag(Tags.Pad).transform.localScale = Pad.Instance.StartPadSize;
     }
 
     public void RestartGame()
@@ -109,23 +113,25 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         _isGameOver = false;
         ScoreManager.Instance.ResetScore();
         //PauseManager.Instance.OnPause?.Invoke(false);
-        //GameObject.FindWithTag(Objects.GameManager).SetActive(true);
-        //GameObject.FindWithTag(Objects.PauseManager).SetActive(true);
+        GameObject.FindWithTag(Objects.GameManager).SetActive(true);
+        GameObject.FindWithTag(Objects.PauseManager).SetActive(true);
+        FindObjectOfType<Pad>().transform.localScale = Pad.Instance.StartPadSize;
+        FindObjectOfType<Ball>().transform.localScale = _ball.StartBallSize;
     }
 
     public void GameOver()
     {
-        _lifes--;
+        Lifes--;
         PauseManager.Instance.StopTime();
-        if (_lifes != 0)
+        if (Lifes != 0)
         {
-            OnLifeChanged?.Invoke(_lifes);
+            OnLifeChanged?.Invoke(Lifes);
             _isStarted = false;
             _ball.RestartPosition();
         }
         else
         {
-            _lifes = Lifes;
+            Lifes = _lifes;
             _isGameOver = true;
             OnGameOver?.Invoke(true);
         }
@@ -133,9 +139,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void ChangeLife(int num)
     {
-        _lifes += num;
-        OnLifeChanged?.Invoke(_lifes);
+        Lifes += num;
+        OnLifeChanged?.Invoke(Lifes);
     }
+
     public void ExitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
@@ -143,7 +150,4 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
     #endregion
-
-
-   
 }

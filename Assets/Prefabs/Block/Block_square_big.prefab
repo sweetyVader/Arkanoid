@@ -130,6 +130,45 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2854ee18f114d4b1fa00a5e53e9e1666, type: 3}
   - {fileID: 21300000, guid: 25fff95bb29da4c8c9e46644cffe8d9b, type: 3}
   _spriteRenderer: {fileID: 2618481643656848606}
-  _pickUpSpawnChance: 0
-  _pickUpInfoArray: []
+  _pickUpSpawnChance: 1
+  _pickUpInfoArray:
+  - name: 
+    PickUpPrefab: {fileID: -6889765969862668133, guid: d677ed79a05b4b541ab6927d210aeda2, type: 3}
+    SpawnChance: 109
+  - name: 
+    PickUpPrefab: {fileID: -6889765969862668133, guid: fae1324b5e526fd468c6be0e503dc39a, type: 3}
+    SpawnChance: 36
+  - name: 
+    PickUpPrefab: {fileID: -140608023800559366, guid: 2e057b8a551ee4442930fcc6e73c470f, type: 3}
+    SpawnChance: 30
+  - name: 
+    PickUpPrefab: {fileID: -140608023800559366, guid: ef1884b0eca1cd24aaf890c210e29ffa, type: 3}
+    SpawnChance: 101
+  - name: 
+    PickUpPrefab: {fileID: -6480649814484302438, guid: cffc5a4d947d12d4c8917e17d771ce50, type: 3}
+    SpawnChance: 186
+  - name: 
+    PickUpPrefab: {fileID: -416800068037465236, guid: ce3bcb02d1d80d8488465bc1551c9fe8, type: 3}
+    SpawnChance: 120
+  - name: 
+    PickUpPrefab: {fileID: -6168274609080310555, guid: 46e83bf0ff777fe4393db77176ddb1f2, type: 3}
+    SpawnChance: 15
+  - name: 
+    PickUpPrefab: {fileID: -6168274609080310555, guid: cd267ea6f505f284c88b4f86efa6d89a, type: 3}
+    SpawnChance: 82
+  - name: 
+    PickUpPrefab: {fileID: -8158492977025335802, guid: a0cac2ae2b349334d8db100e3b505794, type: 3}
+    SpawnChance: 20
+  - name: 
+    PickUpPrefab: {fileID: -8158492977025335802, guid: 2bfcb1a467cba764db4d8fd1edceb1be, type: 3}
+    SpawnChance: 105
+  - name: 
+    PickUpPrefab: {fileID: 4145953194219005487, guid: 613999350e6720f4c885b3154142be81, type: 3}
+    SpawnChance: 40
+  - name: 
+    PickUpPrefab: {fileID: 8745504253555582081, guid: 7800d87341183824893b7765862cff15, type: 3}
+    SpawnChance: 9
+  - name: 
+    PickUpPrefab: {fileID: 4773254921111640799, guid: 5265253fe0b8abf48861b1de02c2be07, type: 3}
+    SpawnChance: 59
   _audioClip: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}

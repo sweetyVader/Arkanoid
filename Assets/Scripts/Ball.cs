@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -7,10 +6,11 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Vector2 _startDirection;
-    [SerializeField] private float _minSpeed = 1;
+    [SerializeField] private float _minSpeed = 3;
 
     private Vector2 _startPosition;
-    private bool _isExplosive = false;
+
+    private bool _isExplosive;
 
     [Header("Music")]
     [SerializeField] private AudioSource _audioSource;
@@ -18,9 +18,17 @@ public class Ball : MonoBehaviour
     #endregion
 
 
+    #region Properties
+
+    public Vector3 StartBallSize { get; private set; }
+
+    #endregion
+
+
     private void Awake()
     {
         _startPosition = transform.position;
+        StartBallSize = transform.localScale;
     }
 
     private void Start()
@@ -29,8 +37,30 @@ public class Ball : MonoBehaviour
             GameManager.Instance.StartBall();
     }
 
+    private void Update()
+    {
+        CheckSpeed();
+    }
+
+    private void CheckSpeed()
+    {
+        Ball[] balls = FindObjectsOfType<Ball>();
+        foreach (Ball ball in balls)
+            if (ball._rb.velocity.magnitude < _minSpeed)
+                ball._rb.velocity = _rb.velocity.normalized * _minSpeed;
+    }
+
 
     #region Private methods
+
+    private static void DestroyBlockByExplosive(Collider2D[] colliders)
+    {
+        foreach (Collider2D collider in colliders)
+        {
+            Block blockToExplode = collider.GetComponent<Block>();
+            blockToExplode.DestroyBlock();
+        }
+    }
 
     private void OnDrawGizmos()
     {
@@ -68,19 +98,28 @@ public class Ball : MonoBehaviour
 
     public void ChangeSpeed(float speedMultiplier)
     {
-        Vector2 velocity = _rb.velocity;
-        float velocityMagnitude = velocity.magnitude;
-        velocityMagnitude *= speedMultiplier;
+        Ball[] balls = FindObjectsOfType<Ball>();
+        foreach (Ball ball in balls)
+        {
+            Vector2 velocity = ball._rb.velocity;
+            float velocityMagnitude = velocity.magnitude;
+            velocityMagnitude *= speedMultiplier;
 
-        if (velocityMagnitude < _minSpeed)
-            velocityMagnitude = _minSpeed;
+            if (velocityMagnitude < _minSpeed)
+                velocityMagnitude = _minSpeed;
 
-        _rb.velocity = velocity.normalized * velocityMagnitude;
+            ball._rb.velocity = velocity.normalized * velocityMagnitude;
+        }
     }
 
     public void ChangeSize(float size)
     {
-        transform.localScale = new Vector3(size, size);
+        float currentSizeBall = gameObject.transform.localScale.x;
+        if (currentSizeBall == size * StartBallSize.x)
+            return;
+        Ball[] balls = FindObjectsOfType<Ball>();
+        foreach (Ball ball in balls)
+            ball.transform.localScale *= size;
     }
 
     public void RestartPosition()
@@ -97,14 +136,9 @@ public class Ball : MonoBehaviour
 
     public void DoubleBall(GameObject ball)
     {
-        Vector3 currentPosition = ball.transform.position;
-
-
-        Instantiate(ball, currentPosition, Quaternion.identity);
+        Instantiate(ball, ball.transform.position, Quaternion.identity);
+        CheckSpeed();
     }
-
-    #endregion
-
 
     public void ChangeSprite(Sprite newSprite, SpriteRenderer ballSpriteRenderer)
     {
@@ -116,12 +150,5 @@ public class Ball : MonoBehaviour
         _isExplosive = true;
     }
 
-    private static void DestroyBlockByExplosive(Collider2D[] colliders)
-    {
-        foreach (Collider2D collider in colliders)
-        {
-            Block blockToExplode = collider.GetComponent<Block>();
-            blockToExplode.DestroyBlock();
-        }
-    }
+    #endregion
 }

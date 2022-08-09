@@ -105,8 +105,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 721f37ea222bf4d61a2baec02fc68cf9, type: 3}
   - {fileID: 21300000, guid: a66c7ee9f8f1b4a6b939a939e6502a4e, type: 3}
   _spriteRenderer: {fileID: 6136662714816824640}
-  _pickUpSpawnChance: 0
-  _pickUpInfoArray: []
+  _pickUpSpawnChance: 0.634
+  _pickUpInfoArray:
+  - name: 
+    PickUpPrefab: {fileID: -6889765969862668133, guid: fae1324b5e526fd468c6be0e503dc39a, type: 3}
+    SpawnChance: 190
+  - name: 
+    PickUpPrefab: {fileID: -140608023800559366, guid: ef1884b0eca1cd24aaf890c210e29ffa, type: 3}
+    SpawnChance: 84
+  - name: 
+    PickUpPrefab: {fileID: -6480649814484302438, guid: cffc5a4d947d12d4c8917e17d771ce50, type: 3}
+    SpawnChance: 54
+  - name: 
+    PickUpPrefab: {fileID: -6168274609080310555, guid: cd267ea6f505f284c88b4f86efa6d89a, type: 3}
+    SpawnChance: 12
+  - name: 
+    PickUpPrefab: {fileID: -8158492977025335802, guid: 2bfcb1a467cba764db4d8fd1edceb1be, type: 3}
+    SpawnChance: 48
+  - name: 
+    PickUpPrefab: {fileID: 8745504253555582081, guid: 7800d87341183824893b7765862cff15, type: 3}
+    SpawnChance: 26
+  - name: 
+    PickUpPrefab: {fileID: 4773254921111640799, guid: 5265253fe0b8abf48861b1de02c2be07, type: 3}
+    SpawnChance: 73
   _audioClip: {fileID: 0}
 --- !u!60 &5972800538751078394
 PolygonCollider2D:

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class LifeScreen : MonoBehaviour
@@ -10,16 +9,11 @@ public class LifeScreen : MonoBehaviour
 
     private float _bias = 1.5f;
 
-    private void Awake()
-    {
-       
-    }
-
     private void Start()
     {
         _numLifes = GameManager.Instance.Lifes;
         LifeChanged(_numLifes);
-        
+
         GameManager.Instance.OnLifeChanged += LifeChanged;
     }
 
@@ -32,13 +26,13 @@ public class LifeScreen : MonoBehaviour
     {
         foreach (GameObject lifeUI in GameObject.FindGameObjectsWithTag(Tags.Life))
             Destroy(lifeUI);
-        
-        Vector2 _startPosition = new Vector2(-11.5f, 6f);
+
+        Vector2 startPosition = new Vector2(-11.5f, 6f);
         for (int i = 0; i < life; i++)
         {
-            Vector2 _lifePosition = _startPosition;
-            _lifePosition.x += _bias * i;
-            Instantiate(_lifePrefab, _lifePosition, Quaternion.identity);
+            Vector2 lifePosition = startPosition;
+            lifePosition.x += _bias * i;
+            Instantiate(_lifePrefab, lifePosition, Quaternion.identity);
         }
     }
 }

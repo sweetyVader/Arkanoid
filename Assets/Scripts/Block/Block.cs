@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Block : MonoBehaviour
@@ -18,29 +17,19 @@ public class Block : MonoBehaviour
     [SerializeField] private float _pickUpSpawnChance;
     [SerializeField] private PickUpInfo[] _pickUpInfoArray;
 
-
     [Header("Music")]
     [SerializeField] private AudioClip _audioClip;
+
     #endregion
 
 
     #region Unity lifecycle
-
-    private void Start()
-    {
-        //     OnCreated?.Invoke(this);
-    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.CompareTag(Tags.Ball))
             return;
         HitToBlock();
-    }
-
-    private void OnDestroy()
-    {
-        //   OnDestroyed?.Invoke(this, _hp);
     }
 
     #endregion
@@ -54,7 +43,6 @@ public class Block : MonoBehaviour
 
         if (_hp <= 0)
         {
-           
             DestroyBlock();
         }
         else

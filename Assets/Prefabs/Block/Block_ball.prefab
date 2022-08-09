@@ -116,7 +116,7 @@ MonoBehaviour:
     PickUpPrefab: {fileID: -140608023800559366, guid: ef1884b0eca1cd24aaf890c210e29ffa, type: 3}
     SpawnChance: 11
   - name: 
-    PickUpPrefab: {fileID: 4145953194219005487, guid: cd267ea6f505f284c88b4f86efa6d89a, type: 3}
+    PickUpPrefab: {fileID: -8158492977025335802, guid: 2bfcb1a467cba764db4d8fd1edceb1be, type: 3}
     SpawnChance: 75
   - name: 
     PickUpPrefab: {fileID: -8158492977025335802, guid: a0cac2ae2b349334d8db100e3b505794, type: 3}

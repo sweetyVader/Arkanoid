@@ -1,15 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pad : SingletonMonoBehaviour<Pad>
 {
-
     #region Variables
 
     private Ball _ball;
 
     #endregion
+
+
     #region Properties
+
+    public Vector3 StartPadSize { get; private set; }
 
     public float PadPositionX { get; private set; }
 
@@ -17,6 +19,12 @@ public class Pad : SingletonMonoBehaviour<Pad>
 
 
     #region Unity lifecycle
+
+    protected override void Awake()
+    {
+        base.Awake();
+        StartPadSize = transform.localScale;
+    }
 
     private void Start()
     {
@@ -37,6 +45,7 @@ public class Pad : SingletonMonoBehaviour<Pad>
         {
             MoveWithMouse();
         }
+
         Vector3 currentPosition = transform.position;
         PadPositionX = currentPosition.x;
     }
@@ -63,17 +72,22 @@ public class Pad : SingletonMonoBehaviour<Pad>
         currentPosition.x = mousePositionInUnits.x;
 
         transform.position = currentPosition;
-
-       
     }
 
     #endregion
 
 
+    #region Public methods
+
     public void ChangeSize(float size)
     {
         Vector3 currentPadScale = transform.localScale;
-        currentPadScale.x = size;
+
+        if (currentPadScale.x == size * StartPadSize.x)
+            return;
+        currentPadScale.x *= size;
         transform.localScale = currentPadScale;
     }
+
+    #endregion
 }
